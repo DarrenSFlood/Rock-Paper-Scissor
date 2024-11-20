@@ -1,10 +1,7 @@
-//global scope player score
-let humanScore = 0;
-let computerScore = 0;
+
 
 //function to randomly generate a Rock, Paper, or Scissor value for the PC
-
-let getComputerChoice = function () {
+const getComputerChoice = function () {
    let randomNumber = Math.random();
 
     if (randomNumber >= 0.66){
@@ -17,60 +14,78 @@ let getComputerChoice = function () {
 }
 
 //function to get Player choice via a prompt.
-
-let getHumanChoice = function() {
+const getHumanChoice = function() {
     let playerChoice = prompt("Enter a selection, Rock, Paper, or Scissor?").toLowerCase();
     return playerChoice;
 }
 
+let playGame = function() {
 
-// Function to play a single round. This should update the global scores and provide a console message stating the outcome.
-let playRound = (humanChoice, computerChoice) => {
-    let victoryMessage = `You win! ${humanChoice} beats ${computerChoice}!`;
-    let defeatMessage = `You lose! ${computerChoice} beats ${humanChoice}!`;
-    let tieMessage = `Tie! Try again!`;
+    let humanScore = 0;
+    let computerScore = 0;
+    
+    let roundCount = function () {
+        if (humanScore === 3){
+            console.log('You did it!');
+        } else if (computerScore === 3) {
+            console.log('You did not do it!');
+        } else {
+            playRound(getHumanChoice(), getComputerChoice());
+        }
+    }
 
-    if (humanChoice === 'rock') {
-        switch (computerChoice) {
-            case 'rock':
-                console.log(tieMessage);
-                break;
-            case 'paper':
-                console.log(defeatMessage);
-                break;
-            case 'scissor':
-                console.log(victoryMessage);
-                break;
-        }
-    } else if (humanChoice === 'paper') {
-        switch (computerChoice) {
-            case 'paper':
-                console.log(tieMessage);
-                break;
-            case 'rock':
-                console.log(victoryMessage);
-                break;
-            case 'scissor':
-                console.log(defeatMessage);
-                break;
-        }
-    } else {
+
+    let playRound = function (humanChoice, computerChoice) {
+        // function scope results variables
+        let victoryMessage = `You win this round! ${humanChoice} beats ${computerChoice}!`;
+        let defeatMessage = `You lose this round! ${computerChoice} beats ${humanChoice}!`;
+        let tieMessage = `Tie! Try again!`;
+
+        if (humanChoice === 'rock') {
+            switch (computerChoice) {
+                case 'rock':
+                    console.log(tieMessage);
+                    break;
+                case 'paper':
+                    console.log(defeatMessage);
+                    computerScore++;
+                    break;
+                case 'scissor':
+                    console.log(victoryMessage);
+                    humanScore++;
+                    break;
+            }
+        } else if (humanChoice === 'paper') {
+            switch (computerChoice) {
+                case 'paper':
+                    console.log(tieMessage);
+                    break;
+                case 'rock':
+                    console.log(victoryMessage);
+                    humanScore++;
+                    break;
+                case 'scissor':
+                    console.log(defeatMessage);
+                    computerScore++;
+                    break;
+            }
+        } else {
             switch (computerChoice) {
                 case 'scissor':
                     console.log(tieMessage);
                     break;
                 case 'rock':
                     console.log(defeatMessage);
+                    computerScore++;
                     break;
                 case 'paper':
                     console.log(victoryMessage);
+                    humanScore++;
                     break;
             }
         }
- }
-
-
-
-
-playRound(getHumanChoice(), getComputerChoice());
-
+        roundCount();
+    }
+    playRound(getHumanChoice, getComputerChoice);
+}
+playGame();
