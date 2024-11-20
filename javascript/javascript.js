@@ -19,6 +19,7 @@ const getHumanChoice = function() {
     return playerChoice;
 }
 
+//function called to initiate the game
 let playGame = function() {
 
     let humanScore = 0;
@@ -86,6 +87,6 @@ let playGame = function() {
         }
         roundCount();
     }
-    playRound(getHumanChoice, getComputerChoice);
+    playRound(getHumanChoice(), getComputerChoice());
 }
 playGame();
