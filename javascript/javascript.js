@@ -21,13 +21,15 @@ const getHumanChoice = function() {
 }
 
 //count rounds to see if you still play.
-function roundCount() {
+function isGameOver() {
     if (humanScore === 3){
         console.log('You did it!');
+        return true;
     } else if (computerScore === 3) {
         console.log('You did not do it!');
+        return true;
     } else {
-        playRound();
+        return false;
     }
 }
 
@@ -84,7 +86,14 @@ function playRound() {
                 break;
         }
     }
-    roundCount();
+
 }
 
-playRound();
+function playGame() {
+    while (!isGameOver()) {
+        playRound();
+    }
+}
+
+playGame();
+
