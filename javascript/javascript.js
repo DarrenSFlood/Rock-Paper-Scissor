@@ -1,4 +1,5 @@
-
+let humanScore = 0;
+let computerScore = 0;
 
 //function to randomly generate a Rock, Paper, or Scissor value for the PC
 const getComputerChoice = function () {
@@ -19,74 +20,71 @@ const getHumanChoice = function() {
     return playerChoice;
 }
 
-//function called to initiate the game
-let playGame = function() {
-
-    let humanScore = 0;
-    let computerScore = 0;
-    
-    let roundCount = function () {
-        if (humanScore === 3){
-            console.log('You did it!');
-        } else if (computerScore === 3) {
-            console.log('You did not do it!');
-        } else {
-            playRound(getHumanChoice(), getComputerChoice());
-        }
+//count rounds to see if you still play.
+function roundCount() {
+    if (humanScore === 3){
+        console.log('You did it!');
+    } else if (computerScore === 3) {
+        console.log('You did not do it!');
+    } else {
+        playRound();
     }
-
-
-    let playRound = function (humanChoice, computerChoice) {
-        // function scope results variables
-        let victoryMessage = `You win this round! ${humanChoice} beats ${computerChoice}!`;
-        let defeatMessage = `You lose this round! ${computerChoice} beats ${humanChoice}!`;
-        let tieMessage = `Tie! Try again!`;
-
-        if (humanChoice === 'rock') {
-            switch (computerChoice) {
-                case 'rock':
-                    console.log(tieMessage);
-                    break;
-                case 'paper':
-                    console.log(defeatMessage);
-                    computerScore++;
-                    break;
-                case 'scissor':
-                    console.log(victoryMessage);
-                    humanScore++;
-                    break;
-            }
-        } else if (humanChoice === 'paper') {
-            switch (computerChoice) {
-                case 'paper':
-                    console.log(tieMessage);
-                    break;
-                case 'rock':
-                    console.log(victoryMessage);
-                    humanScore++;
-                    break;
-                case 'scissor':
-                    console.log(defeatMessage);
-                    computerScore++;
-                    break;
-            }
-        } else {
-            switch (computerChoice) {
-                case 'scissor':
-                    console.log(tieMessage);
-                    break;
-                case 'rock':
-                    console.log(defeatMessage);
-                    computerScore++;
-                    break;
-                case 'paper':
-                    console.log(victoryMessage);
-                    humanScore++;
-                    break;
-            }
-        }
-        roundCount();
-    }
-    playRound(getHumanChoice(), getComputerChoice());
 }
-playGame();
+
+//play a round of the game.
+function playRound() {
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+    
+    // function scope results variables
+    let victoryMessage = `You win this round! ${humanChoice} beats ${computerChoice}!`;
+    let defeatMessage = `You lose this round! ${computerChoice} beats ${humanChoice}!`;
+    let tieMessage = `Tie! Try again!`;
+
+    if (humanChoice === 'rock') {
+        switch (computerChoice) {
+            case 'rock':
+                console.log(tieMessage);
+                break;
+            case 'paper':
+                console.log(defeatMessage);
+                computerScore++;
+                break;
+            case 'scissor':
+                console.log(victoryMessage);
+                humanScore++;
+                break;
+        }
+    } else if (humanChoice === 'paper') {
+        switch (computerChoice) {
+            case 'paper':
+                console.log(tieMessage);
+                break;
+            case 'rock':
+                console.log(victoryMessage);
+                humanScore++;
+                break;
+            case 'scissor':
+                console.log(defeatMessage);
+                computerScore++;
+                break;
+        }
+    } else {
+        switch (computerChoice) {
+            case 'scissor':
+                console.log(tieMessage);
+                break;
+            case 'rock':
+                console.log(defeatMessage);
+                computerScore++;
+                break;
+            case 'paper':
+                console.log(victoryMessage);
+                humanScore++;
+                break;
+        }
+    }
+    roundCount();
+}
+
+playRound();
